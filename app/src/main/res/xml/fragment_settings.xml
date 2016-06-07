@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="通知">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/key_preference_is_notification"
+            android:summary="見ているアニメの放送時間になったらお知らせします。"
+            android:title="放送時間を通知" />
+
+        <EditTextPreference
+            android:dialogTitle="放送何分前に通知？"
+            android:key="@string/key_preference_notification_buffer"
+            android:summary="放送の何分前に通知をするか設定できます。"
+            android:title="通知タイミング" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="その他">
+        <Preference
+            android:key="about"
+            android:title="このアプリについて" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

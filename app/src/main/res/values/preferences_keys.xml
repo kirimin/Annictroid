@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="key_preference_is_notification">preference_is_notification</string>
+    <string name="key_preference_notification_buffer">preference_notification_buffer</string>
+    <string name="key_token">token</string>
+</resources>

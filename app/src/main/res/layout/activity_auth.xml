@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="me.kirimin.annictroid.auth.AuthActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ToolbarTheme" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="認証画面からAnnictにログインし、認証コードをコピーしてください。"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="@dimen/text_medium" />
+
+        <Button
+            android:id="@+id/buttonOpenAuthPage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView1"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/button_accent_color"
+            android:text="認証画面を開く"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_medium" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/authTextInputLayoutCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buttonOpenAuthPage">
+
+            <EditText
+                android:id="@+id/editTextCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:hint="認証コードをここに貼り付けてください。"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="@dimen/text_medium" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/authTextInputLayoutCode"
+            android:background="@drawable/button_accent_color"
+            android:text="ログイン"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_medium" />
+    </RelativeLayout>
+</RelativeLayout>
