@@ -7,7 +7,7 @@
     <string name="about_other_app">他にもいろいろなアプリを公開しています。</string>
     <string name="about_other_app_url">https://play.google.com/store/apps/developer?id=kirimin</string>
     <string name="about_review">レビューを頂けると開発の励みになります</string>
-    <string name="about_review_url">https://play.google.com/store/apps/details?id=me.kirimin.mitsumine</string>
+    <string name="about_review_url">https://play.google.com/store/apps/details?id=me.kirimin.annictroid</string>
     <string name="about_license">オープンソースライセンス</string>
 
 </resources>
