@@ -23,25 +23,17 @@
         android:scrollbars="none">
 
         <RelativeLayout
+            android:id="@+id/layoutParent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textViewWorkTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:textColor="@color/colorTextPrimary"
-                android:textSize="@dimen/text_large"
-                tools:text="くまみこ" />
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <TextView
                 android:id="@+id/textViewEpisodeNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textViewWorkTitle"
-                android:layout_marginBottom="16dp"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="@dimen/text_large"
                 tools:text="第壱話" />
@@ -50,7 +42,7 @@
                 android:id="@+id/textViewEpisodeTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textViewWorkTitle"
+                android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_toRightOf="@id/textViewEpisodeNumber"
                 android:textColor="@color/colorTextPrimary"
@@ -58,10 +50,10 @@
                 tools:text="クマと少女 お別れの時" />
 
             <TextView
-                android:id="@+id/textViewWatchCount"
+                android:id="@+id/textViewRecodeCount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textViewEpisodeNumber"
+                android:layout_below="@id/textViewEpisodeTitle"
                 android:layout_marginBottom="32dp"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/text_medium"
@@ -71,28 +63,38 @@
                 android:id="@+id/layoutEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textViewWatchCount"
+                android:layout_below="@id/textViewRecodeCount"
                 android:orientation="vertical">
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:layout_width="match_parent"
+                    <EditText
+                        android:id="@+id/editTextComment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:hint="@string/episode_comment_hint"
+                        android:minLines="2"
+                        android:textColor="@color/colorTextPrimary"
+                        android:textColorHint="@color/colorTextSecondary"
+                        android:textSize="@dimen/text_medium" />
+                </android.support.design.widget.TextInputLayout>
+
+                <CheckBox
+                    android:id="@+id/checkboxTwitter"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:hint="コメント"
-                    android:minLines="2"
-                    android:textColor="@color/colorTextPrimary"
-                    android:textColorHint="@color/colorTextSecondary"
-                    android:textSize="@dimen/text_medium" />
+                    android:text="@string/episode_twitter_share"
+                    android:textColor="@color/colorTextPrimary" />
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_accent_color"
-                    android:text="登録"
+                    android:text="@string/episode_recode"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/text_medium" />
             </LinearLayout>

@@ -38,7 +38,11 @@ class ProgramListAdapter(context: Context) : ArrayAdapter<Program>(context, 0) {
         holder.episode.text = "#" + program.episode.number + " " + (program.episode.title ?: "")
         holder.channel.text = program.channel.name
         holder.startedAt.text = ApiDateFormatter.getDisplayDateTimeByApiTime(program.started_at)
-        holder.view.setOnClickListener { context.startActivity(Intent(context, EpisodeActivity::class.java)) }
+        holder.view.setOnClickListener {
+            val intent = Intent(context, EpisodeActivity::class.java)
+            intent.putExtras(EpisodeActivity.getBundle(program.episode.id, program.work.title))
+            context.startActivity(intent)
+        }
         holder.watched.setOnClickListener {
             val animation = AnimationUtils.loadAnimation(context, R.anim.list_item_drop)
             animation.setAnimationListener(object : Animation.AnimationListener {

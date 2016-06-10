@@ -1,10 +1,7 @@
 package me.kirimin.annictroid._common.networks.apis
 
 import me.kirimin.annictroid.BuildConfig
-import me.kirimin.annictroid._common.networks.entities.Programs
-import me.kirimin.annictroid._common.networks.entities.Record
-import me.kirimin.annictroid._common.networks.entities.Token
-import me.kirimin.annictroid._common.networks.entities.Works
+import me.kirimin.annictroid._common.networks.entities.*
 import retrofit2.Call
 import retrofit2.http.*
 import rx.Observable
@@ -17,6 +14,17 @@ interface AnnictService {
               @Query("grant_type") grantType: String = "authorization_code",
               @Query("redirect_uri") redirectUri: String = "urn:ietf:wg:oauth:2.0:oob",
               @Query("code") code: String): Observable<Token>
+
+    @Headers("Cache-Control: max-age=86400")
+    @GET("v1/episodes")
+    fun episodes(@Query("access_token") token: String,
+                 @Query("fields") fields: String = "",
+                 @Query("filter_ids") episodeIds: String = "",
+                 @Query("filter_work_id") workIds: String = "",
+                 @Query("page") page: String = "",
+                 @Query("per_page") perPage: String = "",
+                 @Query("sort_id") sortId: String = "",
+                 @Query("sort_sort_number") sortNumber: String = "asc") : Observable<Episodes>
 
     @Headers("Cache-Control: max-age=86400")
     @GET("v1/me/works")
