@@ -6,6 +6,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_program_list.view.*
 import me.kirimin.annictroid.R
 import me.kirimin.annictroid._common.networks.RetrofitClient
@@ -57,8 +58,10 @@ class ProgramListFragment : Fragment() {
                 .subscribe ({
                     adapter.clear()
                     adapter.addAll(it.programs)
+                    view?.textViewEmpty?.visibility = if (adapter.isEmpty) View.VISIBLE else View.GONE
                     view?.swipeLayout?.isRefreshing = false
                 }, {
+                    Toast.makeText(context, "通信に失敗したようです。", Toast.LENGTH_SHORT).show()
                     view?.swipeLayout?.isRefreshing = false
                 }))
     }
