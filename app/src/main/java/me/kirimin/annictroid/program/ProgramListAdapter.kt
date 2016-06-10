@@ -1,6 +1,7 @@
 package me.kirimin.annictroid.program
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import me.kirimin.annictroid._common.networks.entities.Program
 import me.kirimin.annictroid._common.networks.entities.Record
 import me.kirimin.annictroid._common.preferences.AppPreferences
 import me.kirimin.annictroid._common.utils.ApiDateFormatter
+import me.kirimin.annictroid.episode.EpisodeActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,6 +38,7 @@ class ProgramListAdapter(context: Context) : ArrayAdapter<Program>(context, 0) {
         holder.episode.text = "#" + program.episode.number + " " + (program.episode.title ?: "")
         holder.channel.text = program.channel.name
         holder.startedAt.text = ApiDateFormatter.getDisplayDateTimeByApiTime(program.started_at)
+        holder.view.setOnClickListener { context.startActivity(Intent(context, EpisodeActivity::class.java)) }
         holder.watched.setOnClickListener {
             val animation = AnimationUtils.loadAnimation(context, R.anim.list_item_drop)
             animation.setAnimationListener(object : Animation.AnimationListener {
@@ -64,7 +67,7 @@ class ProgramListAdapter(context: Context) : ArrayAdapter<Program>(context, 0) {
         return view
     }
 
-    class ViewHolder(view: View) {
+    class ViewHolder(val view: View) {
         val work: TextView = view.findViewById(R.id.programTextViewWork) as TextView
         val episode: TextView = view.findViewById(R.id.programTextViewEpisode) as TextView
         val channel: TextView = view.findViewById(R.id.programTextViewChannel) as TextView
