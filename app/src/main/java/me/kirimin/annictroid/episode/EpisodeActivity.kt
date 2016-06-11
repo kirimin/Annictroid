@@ -26,6 +26,34 @@ class EpisodeActivity : AppCompatActivity() {
         supportActionBar?.title = workTitle
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
+        ratingBar.setOnRatingBarChangeListener { view, rating, fromUser ->
+            if (!fromUser) return@setOnRatingBarChangeListener
+            if (rating < 1f) {
+                ratingBar.rating = 0f
+                textViewRatingNum.text = "-"
+                return@setOnRatingBarChangeListener
+            }
+            textViewRatingNum.text = rating.toString()
+        }
+        buttonRecode.setOnClickListener {
+            buttonRecode.isClickable = false
+            val rating = textViewRatingNum.text.toString()
+            subscriptions.add(RetrofitClient.default().build().create(AnnictService::class.java)
+                    .meRecords(token = AppPreferences.getToken(this),
+                            episodeId = episodeId,
+                            comment = editTextComment.text.toString(),
+                            rating = if (rating == "-") "" else rating,
+                            shareTwitter = checkboxTwitter.isChecked)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe ({
+                        buttonRecode.isClickable = true
+                        Toast.makeText(this, R.string.episode_recode_completed, Toast.LENGTH_SHORT).show()
+                    }, {
+                        buttonRecode.isClickable = true
+                        Toast.makeText(this, R.string.common_network_error, Toast.LENGTH_SHORT).show()
+                    }))
+        }
         subscriptions.add(RetrofitClient.default().build().create(AnnictService::class.java)
                 .episodes(token = AppPreferences.getToken(this),
                         episodeIds = episodeId)

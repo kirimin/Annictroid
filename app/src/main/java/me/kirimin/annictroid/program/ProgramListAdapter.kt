@@ -19,6 +19,8 @@ import me.kirimin.annictroid.episode.EpisodeActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 
 class ProgramListAdapter(context: Context) : ArrayAdapter<Program>(context, 0) {
 
@@ -51,13 +53,9 @@ class ProgramListAdapter(context: Context) : ArrayAdapter<Program>(context, 0) {
                     notifyDataSetChanged()
                     RetrofitClient.default().build().create(AnnictService::class.java)
                             .meRecords(token = AppPreferences.getToken(context), episodeId = program.episode.id)
-                            .enqueue(object : Callback<Record> {
-                                override fun onFailure(call: Call<Record>?, t: Throwable?) {
-                                }
-
-                                override fun onResponse(call: Call<Record>?, response: Response<Record>?) {
-                                }
-                            })
+                            .subscribeOn(Schedulers.newThread())
+                            .observeOn(Schedulers.newThread())
+                            .subscribe({}, {})
                 }
 
                 override fun onAnimationRepeat(animation: Animation?) {

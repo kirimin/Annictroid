@@ -24,7 +24,7 @@ interface AnnictService {
                  @Query("page") page: String = "",
                  @Query("per_page") perPage: String = "",
                  @Query("sort_id") sortId: String = "",
-                 @Query("sort_sort_number") sortNumber: String = "asc") : Observable<Episodes>
+                 @Query("sort_sort_number") sortNumber: String = "asc"): Observable<Episodes>
 
     @Headers("Cache-Control: max-age=86400")
     @GET("v1/me/works")
@@ -50,5 +50,9 @@ interface AnnictService {
 
     @POST("v1/me/records")
     fun meRecords(@Query("access_token") token: String,
-                  @Query("episode_id") episodeId: String): Call<Record>
+                  @Query("episode_id") episodeId: String,
+                  @Query("comment") comment: String = "",
+                  @Query("rating") rating: String = "",
+                  @Query("share_twitter") shareTwitter: Boolean = false,
+                  @Query("share_facebook") shareFacebook: Boolean = false): Observable<Record>
 }
