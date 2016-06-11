@@ -61,7 +61,7 @@ class ProgramListFragment : Fragment() {
                     view?.textViewEmpty?.visibility = if (adapter.isEmpty) View.VISIBLE else View.GONE
                     view?.swipeLayout?.isRefreshing = false
                 }, {
-                    Toast.makeText(context, "通信に失敗したようです。", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.common_network_error, Toast.LENGTH_SHORT).show()
                     view?.swipeLayout?.isRefreshing = false
                 }))
     }
