@@ -47,7 +47,7 @@ class MyAnimeListFragment : Fragment() {
     fun request() {
         val token = AppPreferences.getToken(context)
         val client = RetrofitClient.default().build().create(AnnictService::class.java)
-        client.meWorks(token = token, status = "watching")
+        subscriptions.add(client.meWorks(token = token, status = "watching")
                 .subscribeOn(Schedulers.newThread())
                 .flatMap { Observable.from(it.works) }
                 // 並列処理のために
@@ -68,6 +68,6 @@ class MyAnimeListFragment : Fragment() {
                     adapter.addAll(it)
                 }, {
                     view?.swipeLayout?.isRefreshing = false
-                })
+                }))
     }
 }
