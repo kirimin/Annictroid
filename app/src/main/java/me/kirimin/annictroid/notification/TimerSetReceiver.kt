@@ -59,7 +59,7 @@ class TimerSetReceiver : BroadcastReceiver() {
         alarmManager.cancel(cancelSender);
 
         val calendar = Calendar.getInstance()
-        calendar.add(Calendar.MINUTE, -Integer.parseInt(AppPreferences.getNotificationBuffer(context)))
+        calendar.add(Calendar.MINUTE, Integer.parseInt(AppPreferences.getNotificationBuffer(context)))
         val startedAtGt = ApiDateFormatter.getApiTime(calendar)
         calendar.add(Calendar.DAY_OF_MONTH, 1)
         val startedAt = ApiDateFormatter.getApiTime(calendar)
@@ -69,7 +69,8 @@ class TimerSetReceiver : BroadcastReceiver() {
                         filterStartedAt = startedAt,
                         filterStartedAtGt = startedAtGt,
                         filterUnWatched = "true",
-                        sortStartedAt = "asc", perPage = "1")
+                        sortStartedAt = "asc",
+                        perPage = "1")
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(Schedulers.newThread())
                 .subscribe ({
@@ -86,7 +87,7 @@ class TimerSetReceiver : BroadcastReceiver() {
                         programDate.time = ApiDateFormatter.getDateByApiTime(it.started_at)
                         programDate.add(Calendar.MINUTE, -Integer.parseInt(AppPreferences.getNotificationBuffer(context)))
                         alarmManager.set(AlarmManager.RTC_WAKEUP, programDate.timeInMillis, sender)
-                        if (BuildConfig.DEBUG) Log.d("test", it.episode.title)
+                        if (BuildConfig.DEBUG) Log.d("test", it.episode.title + " " + programDate.get(Calendar.HOUR_OF_DAY) + " " + programDate.get(Calendar.MINUTE))
                     }
                 }, {
                     // omg
