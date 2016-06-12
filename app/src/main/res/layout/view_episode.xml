@@ -5,8 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/row_vertical_margin"
-    android:paddingLeft="@dimen/row_horizontal_margin"
-    android:paddingRight="@dimen/row_horizontal_margin"
     android:paddingTop="@dimen/row_vertical_margin"
     android:background="@drawable/button_background">
 
