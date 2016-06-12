@@ -77,7 +77,8 @@
                 android:layout_marginRight="8dp"
                 android:background="@drawable/button_accent_color"
                 android:text="@string/work_site"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="16dp"/>
 
             <Button
                 android:id="@+id/buttonWikipedia"
@@ -104,6 +105,7 @@
                 android:id="@+id/layoutEpisodeList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/buttonSite"
                 android:orientation="vertical" />
 
         </RelativeLayout>

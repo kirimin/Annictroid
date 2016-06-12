@@ -20,7 +20,7 @@ interface AnnictService {
     fun episodes(@Query("access_token") token: String,
                  @Query("fields") fields: String = "",
                  @Query("filter_ids") episodeIds: String = "",
-                 @Query("filter_work_id") workIds: String = "",
+                 @Query("filter_work_id") workId: String = "",
                  @Query("page") page: String = "",
                  @Query("per_page") perPage: String = "",
                  @Query("sort_id") sortId: String = "",
