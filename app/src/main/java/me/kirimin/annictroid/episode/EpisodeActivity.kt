@@ -3,6 +3,7 @@ package me.kirimin.annictroid.episode
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_episode.*
@@ -80,6 +81,13 @@ class EpisodeActivity : AppCompatActivity() {
     override fun onDestroy() {
         subscriptions.unsubscribe()
         super.onDestroy()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (android.R.id.home == item.itemId) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {

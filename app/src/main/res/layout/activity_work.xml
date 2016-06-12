@@ -34,7 +34,7 @@
                 android:id="@+id/textViewSeason"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="2dp"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="@dimen/text_medium"
                 tools:text="2014年秋アニメ" />
@@ -44,17 +44,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textViewSeason"
+                android:layout_marginBottom="2dp"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="@dimen/text_medium"
+                tools:text="エピソード数:11" />
+
+            <TextView
+                android:id="@+id/textViewHashTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewEpisodeCount"
                 android:layout_marginBottom="8dp"
-                tools:text="エピソード数:11"
-                android:textColor="@color/colorTextSecondary"/>
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="@dimen/text_medium"
+                tools:text="Twitterハッシュタグ:#はいふり" />
 
             <TextView
                 android:id="@+id/textViewWatchersCount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textViewEpisodeCount"
+                android:layout_below="@id/textViewHashTag"
                 android:layout_marginBottom="16dp"
                 android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_medium"
                 tools:text="この作品を100人が見ています" />
 
             <Button
@@ -72,9 +84,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textViewWatchersCount"
+                android:layout_marginRight="8dp"
                 android:layout_toRightOf="@id/buttonSite"
                 android:background="@drawable/button_accent_color"
                 android:text="@string/work_wikipedia"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/buttonTwitter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewWatchersCount"
+                android:layout_toRightOf="@id/buttonWikipedia"
+                android:background="@drawable/button_accent_color"
+                android:text="@string/work_twitter"
                 android:textColor="@android:color/white" />
 
             <LinearLayout

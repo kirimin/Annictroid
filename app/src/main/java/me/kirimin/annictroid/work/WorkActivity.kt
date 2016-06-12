@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_work.*
@@ -39,11 +40,31 @@ class WorkActivity : AppCompatActivity() {
                     textViewSeason.text = getString(R.string.work_season, work.season_name_text)
                     textViewWatchersCount.text = getString(R.string.work_watchers_count, work.watchers_count)
                     textViewEpisodeCount.text = getString(R.string.work_episode_count, work.episodes_count)
-                    buttonSite.setOnClickListener { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(work.official_site_url))) }
-                    buttonWikipedia.setOnClickListener { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(work.wikipedia_url))) }
+                    textViewHashTag.text = getString(R.string.work_hashtag, work.twitter_hashtag ?: "")
+                    work.official_site_url?.let {
+                        buttonSite.setOnClickListener { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(work.official_site_url))) }
+                    }
+                    work.wikipedia_url?.let {
+                        buttonWikipedia.setOnClickListener { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(work.wikipedia_url))) }
+                    }
+                    work.twitter_username?.let {
+                        buttonTwitter.setOnClickListener { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/" + work.twitter_username))) }
+                    }
                 }, {
                     Toast.makeText(this, R.string.common_network_error, Toast.LENGTH_SHORT).show()
                 }))
+    }
+
+    override fun onDestroy() {
+        subscriptions.unsubscribe()
+        super.onDestroy()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (android.R.id.home == item.itemId) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {
