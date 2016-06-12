@@ -10,7 +10,7 @@ android {
         applicationId "me.kirimin.annictroid"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 11
+        versionCode 20
         versionName "0.2.0"
     }
     buildTypes {
