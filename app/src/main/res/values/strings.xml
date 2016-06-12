@@ -1,6 +1,22 @@
 <resources>
     <string name="app_name">Annictroid</string>
 
+    <string name="common_network_error">通信に失敗したようです。</string>
+
+    <string name="work_season">%1$sアニメ</string>
+    <string name="work_episode_count">エピソード数: %1$d</string>
+    <string name="work_site">公式サイト</string>
+    <string name="work_wikipedia">Wikipedia</string>
+    <string name="work_twitter">Twitter</string>
+    <string name="work_watchers_count">この作品を%1$d人が見ています</string>
+    <string name="work_hashtag">ハッシュタグ: #%1$s</string>
+
+    <string name="episode_recode_count">このエピソードを%1$d人が見ました</string>
+    <string name="episode_comment_hint">見た感想を残してみませんか？</string>
+    <string name="episode_recode">✓ 記録する</string>
+    <string name="episode_recode_completed">記録しました</string>
+    <string name="episode_twitter_share">Twitterにシェア</string>
+
     <string name="about_title">このアプリについて</string>
     <string name="about_develop">開発：きりみん</string>
     <string name="about_develop_url">http://kirimin.me</string>

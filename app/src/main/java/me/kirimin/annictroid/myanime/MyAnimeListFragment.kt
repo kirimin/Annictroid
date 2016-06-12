@@ -1,5 +1,6 @@
 package me.kirimin.annictroid.myanime
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.TypedValue
@@ -15,6 +16,7 @@ import rx.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_my_anime_list.view.*
 import me.kirimin.annictroid._common.models.AnimeInfo
 import me.kirimin.annictroid._common.preferences.AppPreferences
+import me.kirimin.annictroid.work.WorkActivity
 import rx.Observable
 import rx.subscriptions.CompositeSubscription
 
@@ -36,6 +38,12 @@ class MyAnimeListFragment : Fragment() {
         view.swipeLayout.setProgressViewOffset(false, 0, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24f, resources.displayMetrics).toInt())
         view.swipeLayout.setOnRefreshListener { request() }
         view.swipeLayout.isRefreshing = true
+        view.listView.setOnItemClickListener { adapterView, view, i, l ->
+            val item = adapter.getItem(i)
+            val intent = Intent(context, WorkActivity::class.java)
+            intent.putExtras(WorkActivity.getBundle(item.work.id, item.work.title))
+            startActivity(intent)
+        }
         request()
     }
 

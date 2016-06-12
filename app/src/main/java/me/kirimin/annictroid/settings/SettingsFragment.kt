@@ -15,8 +15,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val notificationBuffer = findPreference(getString(R.string.key_preference_notification_buffer)) as EditTextPreference
         notificationBuffer.setOnPreferenceChangeListener { preference, newValue ->
             try {
-                Integer.parseInt(newValue.toString())
-                notificationBuffer.summary = notificationBuffer.text + "分前"
+                val buffer = Integer.parseInt(newValue.toString())
+                notificationBuffer.summary = "${buffer}分前"
                 context.sendBroadcast(Intent(context, TimerSetReceiver::class.java))
                 true
             } catch (e: NumberFormatException) {

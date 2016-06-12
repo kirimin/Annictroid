@@ -5,8 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/row_vertical_margin"
-    android:paddingLeft="@dimen/row_horizontal_margin"
-    android:paddingRight="@dimen/row_horizontal_margin"
     android:paddingTop="@dimen/row_vertical_margin"
     android:background="@drawable/button_background">
 
@@ -17,16 +15,16 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/programTextViewWork"
+            android:id="@+id/viewEpisodeTextViewNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:textColor="@color/colorTextPrimary"
-            android:textSize="@dimen/text_medium"
-            tools:text="くまみこ" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_small"
+            tools:text="第一話" />
 
         <TextView
-            android:id="@+id/programTextViewEpisode"
+            android:id="@+id/viewEpisodeTextViewEpisode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -34,32 +32,15 @@
             android:textSize="@dimen/text_medium"
             tools:text="クマと少女 お別れの時" />
 
-        <LinearLayout
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="0.5dp"
+            android:background="@color/colorPrimary"/>
 
-            <TextView
-                android:id="@+id/programTextViewChannel"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/text_medium"
-                tools:text="放送局" />
-
-            <TextView
-                android:id="@+id/programTextViewStartedAt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_medium"
-                tools:text="06/05 21:00～" />
-        </LinearLayout>
     </LinearLayout>
 
     <Button
-        android:id="@+id/programCheckBoxWatched"
+        android:id="@+id/viewEpisodeCheckBoxWatched"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_gravity="center_vertical"
@@ -68,6 +49,7 @@
         android:gravity="center_vertical|center_horizontal"
         android:text="✓"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/text_medium" />
+        android:textSize="@dimen/text_medium"
+        android:visibility="gone"/>
 
 </LinearLayout>

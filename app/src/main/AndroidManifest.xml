@@ -15,17 +15,17 @@
         <activity android:name=".top.TopActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".episode.EpisodeActivity" />
         <activity android:name=".auth.AuthActivity" />
-
         <activity
             android:name=".settings.SettingsActivity"
             android:theme="@style/SettingsTheme" />
-
-        <activity android:name=".settings.AboutActivity"/>
-        <activity android:name=".settings.LicenseActivity"/>
+        <activity android:name=".settings.AboutActivity" />
+        <activity android:name=".settings.LicenseActivity" />
 
         <receiver android:name=".notification.ProgramReceiver" />
         <receiver android:name=".notification.TimerSetReceiver">
@@ -38,6 +38,7 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".work.WorkActivity"></activity>
     </application>
 
 </manifest>
