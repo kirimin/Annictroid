@@ -69,7 +69,7 @@ class EpisodeActivity : AppCompatActivity() {
                     textViewRecodeCount.text = getString(R.string.episode_recode_count, episode.records_count)
                     buttonWork.setOnClickListener {
                         val intent = Intent(this, WorkActivity::class.java)
-                        intent.putExtras(WorkActivity.getBundle(episode.id, episode.work.id))
+                        intent.putExtras(WorkActivity.getBundle(episode.work.id, episode.work.title))
                         startActivity(intent)
                     }
                 }, {

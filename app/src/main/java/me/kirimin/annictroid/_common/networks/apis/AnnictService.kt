@@ -29,9 +29,9 @@ interface AnnictService {
     @Headers("Cache-Control: max-age=86400")
     @GET("v1/works")
     fun works(@Query("access_token") token: String,
-              @Query("filter_ids") filterIds: String = "",
-              @Query("filter_season") filterSeason: String = "",
-              @Query("filter_title") filterTitle: String = "",
+              @Query("filter_ids") workIds: String = "",
+              @Query("filter_season") season: String = "",
+              @Query("filter_title") title: String = "",
               @Query("page") page: String = "",
               @Query("per_page") perPage: String = "",
               @Query("sort_id") sortId: String = "",

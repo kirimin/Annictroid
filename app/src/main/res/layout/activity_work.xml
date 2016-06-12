@@ -30,6 +30,58 @@
             android:visibility="gone"
             tools:visibility="visible">
 
+            <TextView
+                android:id="@+id/textViewSeason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="@dimen/text_medium"
+                tools:text="2014年秋アニメ" />
+
+            <TextView
+                android:id="@+id/textViewEpisodeCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewSeason"
+                android:layout_marginBottom="8dp"
+                tools:text="エピソード数:11"
+                android:textColor="@color/colorTextSecondary"/>
+
+            <TextView
+                android:id="@+id/textViewWatchersCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewEpisodeCount"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/colorAccent"
+                tools:text="この作品を100人が見ています" />
+
+            <Button
+                android:id="@+id/buttonSite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewWatchersCount"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/button_accent_color"
+                android:text="@string/work_site"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/buttonWikipedia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewWatchersCount"
+                android:layout_toRightOf="@id/buttonSite"
+                android:background="@drawable/button_accent_color"
+                android:text="@string/work_wikipedia"
+                android:textColor="@android:color/white" />
+
+            <LinearLayout
+                android:id="@+id/layoutEpisodeList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
 
         </RelativeLayout>
     </ScrollView>
