@@ -1,7 +1,9 @@
 package me.kirimin.annictroid.episode
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_episode.*
@@ -9,6 +11,7 @@ import me.kirimin.annictroid.R
 import me.kirimin.annictroid._common.networks.RetrofitClient
 import me.kirimin.annictroid._common.networks.apis.AnnictService
 import me.kirimin.annictroid._common.preferences.AppPreferences
+import me.kirimin.annictroid.work.WorkActivity
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription
@@ -65,6 +68,11 @@ class EpisodeActivity : AppCompatActivity() {
                     textViewEpisodeNumber.text = episode.number_text
                     textViewEpisodeTitle.text = episode.title
                     textViewRecodeCount.text = getString(R.string.episode_recode_count, episode.records_count)
+                    buttonWork.setOnClickListener {
+                        val intent = Intent(this, WorkActivity::class.java)
+                        intent.putExtras(WorkActivity.getBundle(episode.work.id, episode.work.title))
+                        startActivity(intent)
+                    }
                 }, {
                     Toast.makeText(this, R.string.common_network_error, Toast.LENGTH_SHORT).show()
                 }))
@@ -73,6 +81,13 @@ class EpisodeActivity : AppCompatActivity() {
     override fun onDestroy() {
         subscriptions.unsubscribe()
         super.onDestroy()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (android.R.id.home == item.itemId) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {

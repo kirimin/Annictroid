@@ -54,16 +54,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textViewEpisodeTitle"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="16dp"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/text_medium"
                 tools:text="@string/episode_recode_count" />
+
+            <Button
+                android:id="@+id/buttonWork"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewRecodeCount"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/button_accent_color"
+                android:paddingRight="4dp"
+                android:paddingLeft="4dp"
+                android:text="作品情報を見る"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_small"/>
 
             <LinearLayout
                 android:id="@+id/layoutEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textViewRecodeCount"
+                android:layout_below="@id/buttonWork"
                 android:orientation="vertical">
 
                 <android.support.design.widget.TextInputLayout
@@ -95,7 +108,7 @@
                         android:numStars="5"
                         android:rating="0"
                         android:stepSize="0.1"
-                        android:theme="@style/RatingBarTheme"/>
+                        android:theme="@style/RatingBarTheme" />
 
                     <TextView
                         android:id="@+id/textViewRatingNum"

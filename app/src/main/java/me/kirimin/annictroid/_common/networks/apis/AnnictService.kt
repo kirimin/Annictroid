@@ -20,11 +20,23 @@ interface AnnictService {
     fun episodes(@Query("access_token") token: String,
                  @Query("fields") fields: String = "",
                  @Query("filter_ids") episodeIds: String = "",
-                 @Query("filter_work_id") workIds: String = "",
+                 @Query("filter_work_id") workId: String = "",
                  @Query("page") page: String = "",
                  @Query("per_page") perPage: String = "",
                  @Query("sort_id") sortId: String = "",
                  @Query("sort_sort_number") sortNumber: String = "asc"): Observable<Episodes>
+
+    @Headers("Cache-Control: max-age=86400")
+    @GET("v1/works")
+    fun works(@Query("access_token") token: String,
+              @Query("filter_ids") workIds: String = "",
+              @Query("filter_season") season: String = "",
+              @Query("filter_title") title: String = "",
+              @Query("page") page: String = "",
+              @Query("per_page") perPage: String = "",
+              @Query("sort_id") sortId: String = "",
+              @Query("sort_season") sortSeason: String = "",
+              @Query("sort_watchers_count") sortWatchers: String = ""): Observable<Works>
 
     @Headers("Cache-Control: max-age=86400")
     @GET("v1/me/works")

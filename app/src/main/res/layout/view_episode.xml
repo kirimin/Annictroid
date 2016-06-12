@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/row_vertical_margin"
+    android:paddingTop="@dimen/row_vertical_margin"
+    android:background="@drawable/button_background">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/viewEpisodeTextViewNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_small"
+            tools:text="第一話" />
+
+        <TextView
+            android:id="@+id/viewEpisodeTextViewEpisode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="@dimen/text_medium"
+            tools:text="クマと少女 お別れの時" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/colorPrimary"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/viewEpisodeCheckBoxWatched"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/button_accent_color"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="✓"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_medium"
+        android:visibility="gone"/>
+
+</LinearLayout>
