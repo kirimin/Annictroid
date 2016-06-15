@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory android:title="通知">
         <CheckBoxPreference
@@ -7,6 +8,12 @@
             android:key="@string/key_preference_is_notification"
             android:summary="見ているアニメの放送時間になったらお知らせします。"
             android:title="放送時間を通知" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/key_preference_notification_with_sound"
+            android:summary="チェックを外すと静かに通知します。"
+            android:title="通知時に音と振動を鳴らす" />
 
         <EditTextPreference
             android:dialogTitle="放送何分前に通知？"

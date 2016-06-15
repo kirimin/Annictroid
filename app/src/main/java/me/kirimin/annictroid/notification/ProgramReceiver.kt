@@ -24,7 +24,9 @@ class ProgramReceiver : BroadcastReceiver() {
         builder.setSmallIcon(R.drawable.ic_stat_annict)
                 .setContentTitle(work)
                 .setContentText("#$episodeNum　$time")
-                .setDefaults(NotificationCompat.DEFAULT_ALL)
+        if (AppPreferences.isNotificationWithSound(context)) {
+            builder.setDefaults(NotificationCompat.DEFAULT_ALL)
+        }
 
         val manager = NotificationManagerCompat.from(context);
         manager.notify(1, builder.build());
