@@ -18,4 +18,7 @@ object AppPreferences {
 
     fun isNotificationEnable(context: Context) =
             PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getString(R.string.key_preference_is_notification), true)
+
+    fun isNotificationWithSound(context: Context) =
+            PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getString(R.string.key_preference_notification_with_sound), true)
 }

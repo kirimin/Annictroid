@@ -98,6 +98,7 @@
                     android:textSize="@dimen/text_medium" />
 
                 <TextView
+                    android:id="@+id/navigationButtonLogout"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@drawable/button_background"
@@ -106,8 +107,7 @@
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     android:text="ログアウト"
                     android:textColor="@color/colorTextSecondary"
-                    android:textSize="@dimen/text_medium"
-                    android:visibility="gone" />
+                    android:textSize="@dimen/text_medium" />
             </LinearLayout>
         </ScrollView>
 
