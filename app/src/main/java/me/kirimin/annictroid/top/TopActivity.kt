@@ -46,6 +46,13 @@ class TopActivity : AppCompatActivity() {
             startActivity(Intent(this, SettingsActivity::class.java))
             drawerLayout.closeDrawers()
         }
+        navigationButtonLogout.setOnClickListener {
+            AppPreferences.setToken(this, "")
+            finish()
+            val intent = Intent(this, AuthActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
