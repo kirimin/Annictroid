@@ -2,6 +2,7 @@ package me.kirimin.annictroid.program
 
 import android.content.Context
 import android.content.Intent
+import android.support.v7.widget.CardView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,7 +70,8 @@ class ProgramListAdapter(context: Context) : ArrayAdapter<Program>(context, 0) {
         return view
     }
 
-    class ViewHolder(val view: View) {
+    class ViewHolder(view: View) {
+        val view: CardView = view.findViewById(R.id.programCardView) as CardView
         val work: TextView = view.findViewById(R.id.programTextViewWork) as TextView
         val episode: TextView = view.findViewById(R.id.programTextViewEpisode) as TextView
         val channel: TextView = view.findViewById(R.id.programTextViewChannel) as TextView
