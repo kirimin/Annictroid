@@ -1,11 +1,14 @@
 package me.kirimin.annictroid.top
 
+import android.app.Dialog
 import android.content.Intent
 import android.content.res.Configuration
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.DialogFragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AlertDialog
 import android.view.MenuItem
 
 import me.kirimin.annictroid.auth.AuthActivity
@@ -47,11 +50,7 @@ class TopActivity : AppCompatActivity() {
             drawerLayout.closeDrawers()
         }
         navigationButtonLogout.setOnClickListener {
-            AppPreferences.setToken(this, "")
-            finish()
-            val intent = Intent(this, AuthActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
+            LogoutDialogFragment().show(supportFragmentManager, LogoutDialogFragment::class.java.canonicalName)
         }
     }
 
@@ -68,5 +67,24 @@ class TopActivity : AppCompatActivity() {
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         drawerToggle.onConfigurationChanged(newConfig)
+    }
+
+    class LogoutDialogFragment : DialogFragment() {
+
+        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+            return AlertDialog.Builder(activity)
+                    .setTitle("ログアウト")
+                    .setMessage("ログアウトしますか？")
+                    .setPositiveButton(android.R.string.ok) { dialog, which ->
+                        val activity = activity ?: return@setPositiveButton
+                        AppPreferences.setToken(activity, "")
+                        activity.finish()
+                        val intent = Intent(activity, AuthActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        startActivity(intent)
+                    }
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .create()
+        }
     }
 }
