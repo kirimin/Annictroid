@@ -57,20 +57,14 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:minHeight="?attr/actionBarSize" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
+                    android:background="@android:color/white"
                     android:minHeight="?attr/actionBarSize" />
 
                 <TextView
                     android:id="@+id/navigationButtonHome"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="@drawable/button_background"
+                    android:background="?android:attr/selectableItemBackground"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/activity_horizontal_margin"
                     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -89,7 +83,7 @@
                     android:id="@+id/navigationButtonSettings"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="@drawable/button_background"
+                    android:background="?android:attr/selectableItemBackground"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/activity_horizontal_margin"
                     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -101,7 +95,7 @@
                     android:id="@+id/navigationButtonLogout"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="@drawable/button_background"
+                    android:background="?android:attr/selectableItemBackground"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/activity_horizontal_margin"
                     android:paddingRight="@dimen/activity_horizontal_margin"

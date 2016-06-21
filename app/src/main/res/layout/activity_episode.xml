@@ -61,16 +61,14 @@
 
             <Button
                 android:id="@+id/buttonWork"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textViewRecodeCount"
                 android:layout_marginBottom="32dp"
-                android:background="@drawable/button_accent_color"
-                android:paddingRight="4dp"
-                android:paddingLeft="4dp"
                 android:text="作品情報を見る"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_small"/>
+                android:textSize="@dimen/text_small" />
 
             <LinearLayout
                 android:id="@+id/layoutEdit"
@@ -133,9 +131,9 @@
 
                 <Button
                     android:id="@+id/buttonRecode"
+                    style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/button_accent_color"
                     android:text="@string/episode_recode"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/text_medium" />

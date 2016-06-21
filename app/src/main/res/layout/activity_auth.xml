@@ -33,11 +33,11 @@
 
         <Button
             android:id="@+id/buttonOpenAuthPage"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView1"
             android:layout_marginBottom="32dp"
-            android:background="@drawable/button_accent_color"
             android:text="認証画面を開く"
             android:textColor="@android:color/white"
             android:textSize="@dimen/text_medium" />
@@ -60,10 +60,10 @@
 
         <Button
             android:id="@+id/buttonLogin"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/authTextInputLayoutCode"
-            android:background="@drawable/button_accent_color"
             android:text="ログイン"
             android:textColor="@android:color/white"
             android:textSize="@dimen/text_medium" />

@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:paddingBottom="@dimen/row_vertical_margin"
     android:paddingTop="@dimen/row_vertical_margin"
-    android:background="@drawable/button_background">
+    android:background="?android:attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="0dp"
