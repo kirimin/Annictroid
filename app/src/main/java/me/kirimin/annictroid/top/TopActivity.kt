@@ -6,7 +6,6 @@ import android.content.res.Configuration
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
 import android.view.MenuItem
@@ -16,8 +15,6 @@ import me.kirimin.annictroid.auth.AuthActivity
 import kotlinx.android.synthetic.main.activity_top.*
 import me.kirimin.annictroid.R
 import me.kirimin.annictroid._common.preferences.AppPreferences
-import me.kirimin.annictroid.program.ProgramListFragment
-import me.kirimin.annictroid.myanime.MyAnimeListFragment
 import me.kirimin.annictroid.settings.SettingsActivity
 
 class TopActivity : AppCompatActivity() {
@@ -38,12 +35,6 @@ class TopActivity : AppCompatActivity() {
         supportActionBar?.setHomeButtonEnabled(true)
         drawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.app_name, R.string.app_name)
         drawerLayout.addDrawerListener(drawerToggle)
-        val adapter = TopPagerAdapter(supportFragmentManager)
-        adapter.addPage(ProgramListFragment(), "放送予定")
-        adapter.addPage(MyAnimeListFragment(), "見てるアニメ")
-        viewPager.adapter = adapter
-        pagerTab.setTextColor(ContextCompat.getColor(this, android.R.color.white))
-        pagerTab.setViewPager(viewPager)
         navigationButtonHome.setOnClickListener { drawerLayout.closeDrawers() }
         navigationButtonSettings.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
@@ -52,6 +43,11 @@ class TopActivity : AppCompatActivity() {
         navigationButtonLogout.setOnClickListener {
             LogoutDialogFragment().show(supportFragmentManager, LogoutDialogFragment::class.java.canonicalName)
         }
+
+        supportFragmentManager
+                .beginTransaction()
+                .add(R.id.layoutFragmentContainer, TopFragment())
+                .commit()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
