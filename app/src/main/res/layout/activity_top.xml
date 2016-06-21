@@ -52,15 +52,27 @@
                     android:minHeight="?attr/actionBarSize" />
 
                 <TextView
-                    android:id="@+id/navigationButtonHome"
+                android:id="@+id/navigationButtonHome"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:text="ホーム"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_medium" />
+
+                <TextView
+                    android:id="@+id/navigationButtonAnimeList"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="?android:attr/selectableItemBackground"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/activity_horizontal_margin"
                     android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:text="ホーム"
-                    android:textColor="@color/colorPrimary"
+                    android:text="アニメを探す"
+                    android:textColor="@color/colorTextSecondary"
                     android:textSize="@dimen/text_medium" />
 
                 <View
