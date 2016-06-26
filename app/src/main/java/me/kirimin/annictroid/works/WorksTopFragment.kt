@@ -8,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_top.view.*
 import me.kirimin.annictroid.R
-import me.kirimin.annictroid.myanime.MyAnimeListFragment
-import me.kirimin.annictroid.program.ProgramListFragment
 import me.kirimin.annictroid.top.TopPagerAdapter
 
 class WorksTopFragment : Fragment() {
@@ -21,9 +19,11 @@ class WorksTopFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = TopPagerAdapter(childFragmentManager)
-//        adapter.addPage(ProgramListFragment(), "シーズン")
-//        adapter.addPage(MyAnimeListFragment(), "人気のアニメ")
+        adapter.addPage(WorkListFragment.newInstance(WorkListFragment.Type.THIS_SEASON), "今期")
+        adapter.addPage(WorkListFragment.newInstance(WorkListFragment.Type.NEXT_SEASON), "来期")
+        adapter.addPage(WorkListFragment.newInstance(WorkListFragment.Type.ALL), "人気")
         view?.viewPager?.adapter = adapter
+        view?.viewPager?.offscreenPageLimit = 2
         view?.pagerTab?.setTextColor(ContextCompat.getColor(context, android.R.color.white))
         view?.pagerTab?.setViewPager(view.viewPager)
     }
