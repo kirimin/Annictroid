@@ -64,7 +64,8 @@ class MyAnimeListFragment : Fragment() {
                             .subscribeOn(Schedulers.computation())
                             .map {
                                 val recentProgram = client.recentProgram(token = token, workIds = it.id).execute()
-                                if (recentProgram.isSuccessful) AnimeInfo(it, recentProgram.body().programs[0]) else AnimeInfo(it, null)
+                                val programs = recentProgram.body().programs
+                                if (recentProgram.isSuccessful && !programs.isEmpty()) AnimeInfo(it, programs[0]) else AnimeInfo(it, null)
                             }
                 }
                 .observeOn(AndroidSchedulers.mainThread())
