@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +31,7 @@ class WorkListFragment : Fragment() {
     private val subscriptions = CompositeSubscription()
     private lateinit var adapter: WorkListAdapter
     private var type = Type.THIS_SEASON
+    private var nextPage: Int? = 1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_work_list, container, false)
@@ -47,9 +49,29 @@ class WorkListFragment : Fragment() {
         view.recyclerView.adapter = adapter
         view.recyclerView.layoutManager = LinearLayoutManager(context)
         view.recyclerView.addItemDecoration(DividerItemDecoration(context))
+        adapter.notifyDataSetChanged()
+        // 更読み用処理
+        view.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dx == 0 && dy == 0) return
+                if (nextPage == null) return
+                val layoutManager = getView()?.recyclerView?.layoutManager as? LinearLayoutManager ?: return
+                val totalItemCount = layoutManager.itemCount
+                val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
+                if (totalItemCount == lastVisibleItem + 1) {
+                    request()
+                    nextPage = null
+                }
+            }
+        })
         view.swipeLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent)
         view.swipeLayout.setProgressViewOffset(false, 0, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24f, resources.displayMetrics).toInt())
-        view.swipeLayout.setOnRefreshListener { request() }
+        view.swipeLayout.setOnRefreshListener {
+            adapter.data.clear()
+            nextPage = 1
+            request()
+        }
         request()
     }
 
@@ -59,6 +81,7 @@ class WorkListFragment : Fragment() {
     }
 
     fun request() {
+        view?.swipeLayout?.isRefreshing = true
         val token = AppPreferences.getToken(context)
         val client = RetrofitClient.default().build().create(AnnictService::class.java)
         val season = when (type) {
@@ -66,15 +89,14 @@ class WorkListFragment : Fragment() {
             Type.NEXT_SEASON -> ApiDateFormatter.getNextSeason(Calendar.getInstance())
             Type.ALL -> ""
         }
-        subscriptions.add(client.works(token = token, season = season, sortWatchers = "desc")
+        subscriptions.add(client.works(token = token, season = season, sortWatchers = "desc", page = nextPage?.toString() ?: "")
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .map { it.works }
                 .subscribe ({
                     view?.swipeLayout?.isRefreshing = false
-                    adapter.data.clear()
-                    adapter.data.addAll(it)
+                    adapter.data.addAll(it.works)
                     adapter.notifyDataSetChanged()
+                    nextPage = it.next_page
                 }, {
                     view?.swipeLayout?.isRefreshing = false
                 }))
