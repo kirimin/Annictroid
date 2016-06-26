@@ -14,10 +14,12 @@ import me.kirimin.annictroid._common.networks.RetrofitClient
 import me.kirimin.annictroid._common.networks.apis.AnnictService
 import me.kirimin.annictroid._common.preferences.AppPreferences
 import me.kirimin.annictroid._common.ui_parts.DividerItemDecoration
+import me.kirimin.annictroid._common.utils.ApiDateFormatter
 import me.kirimin.annictroid.work.WorkActivity
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription
+import java.util.*
 
 class WorkListFragment : Fragment() {
 
@@ -60,8 +62,8 @@ class WorkListFragment : Fragment() {
         val token = AppPreferences.getToken(context)
         val client = RetrofitClient.default().build().create(AnnictService::class.java)
         val season = when (type) {
-            Type.THIS_SEASON -> "2016-spring"
-            Type.NEXT_SEASON -> "2016-summer"
+            Type.THIS_SEASON -> ApiDateFormatter.getCurrentSeason(Calendar.getInstance())
+            Type.NEXT_SEASON -> ApiDateFormatter.getNextSeason(Calendar.getInstance())
             Type.ALL -> ""
         }
         subscriptions.add(client.works(token = token, season = season, sortWatchers = "desc")

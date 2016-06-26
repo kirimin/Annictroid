@@ -33,4 +33,36 @@ object ApiDateFormatter {
         return DateFormat.format(inFormat, calendar).toString()
     }
 
+    /**
+     * APIに送信するための今期指定文字列を取得
+     * 例："2016-spring"
+     */
+    fun getCurrentSeason(calendar: Calendar): String {
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        return year.toString() + "-" + when (month) {
+            in Calendar.JANUARY..Calendar.MARCH -> "winter"
+            in Calendar.APRIL..Calendar.JUNE -> "spring"
+            in Calendar.JULY..Calendar.SEPTEMBER -> "summer"
+            in Calendar.OCTOBER..Calendar.DECEMBER -> "autumn"
+            else -> ""
+        }
+    }
+
+    /**
+     * APIに送信するための来期指定文字列を取得
+     * 例："2016-summer"
+     */
+    fun getNextSeason(calendar: Calendar): String {
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        return when (month) {
+            in Calendar.JANUARY..Calendar.MARCH -> year.toString() + "-spring"
+            in Calendar.APRIL..Calendar.JUNE -> year.toString() + "-summer"
+            in Calendar.JULY..Calendar.SEPTEMBER -> year.toString() + "-autumn"
+            in Calendar.OCTOBER..Calendar.DECEMBER -> (year + 1).toString() + "-winter"
+            else -> ""
+        }
+    }
+
 }
