@@ -7,7 +7,8 @@
     android:paddingBottom="@dimen/row_vertical_margin"
     android:paddingLeft="@dimen/row_horizontal_margin"
     android:paddingRight="@dimen/row_horizontal_margin"
-    android:paddingTop="@dimen/row_vertical_margin">
+    android:paddingTop="@dimen/row_vertical_margin"
+    android:background="?android:attr/selectableItemBackground">
 
     <TextView
         android:id="@+id/workListTextViewTitle"
