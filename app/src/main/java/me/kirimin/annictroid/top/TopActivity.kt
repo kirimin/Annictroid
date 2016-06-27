@@ -6,19 +6,21 @@ import android.content.res.Configuration
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
+import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
 import android.view.MenuItem
+import android.widget.TextView
 
 import me.kirimin.annictroid.auth.AuthActivity
 
 import kotlinx.android.synthetic.main.activity_top.*
 import me.kirimin.annictroid.R
 import me.kirimin.annictroid._common.preferences.AppPreferences
-import me.kirimin.annictroid.program.ProgramListFragment
-import me.kirimin.annictroid.myanime.MyAnimeListFragment
 import me.kirimin.annictroid.settings.SettingsActivity
+import me.kirimin.annictroid.works.WorksTopFragment
+import org.w3c.dom.Text
 
 class TopActivity : AppCompatActivity() {
 
@@ -33,24 +35,30 @@ class TopActivity : AppCompatActivity() {
             finish()
             return
         }
+
         supportActionBar?.title = getString(R.string.app_name)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
         drawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.app_name, R.string.app_name)
         drawerLayout.addDrawerListener(drawerToggle)
-        val adapter = TopPagerAdapter(supportFragmentManager)
-        adapter.addPage(ProgramListFragment(), "放送予定")
-        adapter.addPage(MyAnimeListFragment(), "見てるアニメ")
-        viewPager.adapter = adapter
-        pagerTab.setTextColor(ContextCompat.getColor(this, android.R.color.white))
-        pagerTab.setViewPager(viewPager)
-        navigationButtonHome.setOnClickListener { drawerLayout.closeDrawers() }
+        navigationButtonHome.setOnClickListener {
+            replaceContent(TopFragment(), navigationButtonHome)
+            drawerLayout.closeDrawers()
+        }
+        navigationButtonAnimeList.setOnClickListener {
+            replaceContent(WorksTopFragment(), navigationButtonAnimeList)
+            drawerLayout.closeDrawers()
+        }
         navigationButtonSettings.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
             drawerLayout.closeDrawers()
         }
         navigationButtonLogout.setOnClickListener {
             LogoutDialogFragment().show(supportFragmentManager, LogoutDialogFragment::class.java.canonicalName)
+        }
+
+        if (savedInstanceState == null) {
+            replaceContent(TopFragment(), navigationButtonHome)
         }
     }
 
@@ -67,6 +75,17 @@ class TopActivity : AppCompatActivity() {
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         drawerToggle.onConfigurationChanged(newConfig)
+    }
+
+    private fun replaceContent(fragment: Fragment, selectedItem: TextView) {
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.layoutFragmentContainer, fragment)
+                .commit()
+        navigationButtonHome.setTextColor(ContextCompat.getColor(this, R.color.colorTextSecondary))
+        navigationButtonAnimeList.setTextColor(ContextCompat.getColor(this, R.color.colorTextSecondary))
+
+        selectedItem.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
     }
 
     class LogoutDialogFragment : DialogFragment() {

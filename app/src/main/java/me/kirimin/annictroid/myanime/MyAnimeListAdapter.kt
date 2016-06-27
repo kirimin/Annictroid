@@ -28,6 +28,9 @@ class MyAnimeListAdapter(context: Context) : ArrayAdapter<AnimeInfo>(context, 0)
         if (anime.recentProgram != null) {
             holder.season.text = anime.recentProgram.channel.name
             holder.startedAt.text = ApiDateFormatter.getDisplayDateTimeByApiTime(anime.recentProgram.started_at, "E kk:mm~")
+        } else {
+            holder.season.text = ""
+            holder.startedAt.text = ""
         }
         return view
     }
