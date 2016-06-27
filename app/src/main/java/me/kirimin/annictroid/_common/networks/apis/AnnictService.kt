@@ -22,7 +22,7 @@ interface AnnictService {
                  @Query("filter_ids") episodeIds: String = "",
                  @Query("filter_work_id") workId: String = "",
                  @Query("page") page: String = "",
-                 @Query("per_page") perPage: String = "",
+                 @Query("per_page") perPage: String = "50",
                  @Query("sort_id") sortId: String = "",
                  @Query("sort_sort_number") sortNumber: String = "asc"): Observable<Episodes>
 
@@ -41,7 +41,15 @@ interface AnnictService {
     @Headers("Cache-Control: max-age=86400")
     @GET("v1/me/works")
     fun meWorks(@Query("access_token") token: String,
-                @Query("filter_status") status: String = ""): Observable<Works>
+                @Query("filter_ids") workIds: String = "",
+                @Query("filter_season") season: String = "",
+                @Query("filter_title") title: String = "",
+                @Query("filter_status") status: String = "",
+                @Query("page") page: String = "",
+                @Query("per_page") perPage: String = "15",
+                @Query("sort_id") sortId: String = "",
+                @Query("sort_season") sortSeason: String = "",
+                @Query("sort_watchers_count") sortWatchers: String = ""): Observable<Works>
 
     @Headers("Cache-Control: max-age=0")
     @GET("v1/me/programs")
@@ -52,7 +60,7 @@ interface AnnictService {
                    @Query("filter_started_at_gt") filterStartedAtGt: String = "",
                    @Query("filter_work_ids") workIds: String = "",
                    @Query("page") page: String = "",
-                   @Query("per_page") perPage: String = "50"): Observable<Programs>
+                   @Query("per_page") perPage: String = ""): Observable<Programs>
 
     @Headers("Cache-Control: max-age=86400")
     @GET("v1/me/programs")
