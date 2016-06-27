@@ -51,6 +51,7 @@ interface AnnictService {
                    @Query("filter_started_at_lt") filterStartedAt: String = "",
                    @Query("filter_started_at_gt") filterStartedAtGt: String = "",
                    @Query("filter_work_ids") workIds: String = "",
+                   @Query("page") page: String = "",
                    @Query("per_page") perPage: String = "50"): Observable<Programs>
 
     @Headers("Cache-Control: max-age=86400")

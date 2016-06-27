@@ -49,7 +49,6 @@ class WorkListFragment : Fragment() {
         view.recyclerView.adapter = adapter
         view.recyclerView.layoutManager = LinearLayoutManager(context)
         view.recyclerView.addItemDecoration(DividerItemDecoration(context))
-        adapter.notifyDataSetChanged()
         // 更読み用処理
         view.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {

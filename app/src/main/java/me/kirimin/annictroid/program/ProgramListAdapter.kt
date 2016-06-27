@@ -3,6 +3,7 @@ package me.kirimin.annictroid.program
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.CardView
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,60 +18,50 @@ import me.kirimin.annictroid._common.networks.entities.Record
 import me.kirimin.annictroid._common.preferences.AppPreferences
 import me.kirimin.annictroid._common.utils.ApiDateFormatter
 import me.kirimin.annictroid.episode.EpisodeActivity
+import me.kirimin.annictroid.works.WorkListAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
-class ProgramListAdapter(context: Context) : ArrayAdapter<Program>(context, 0) {
+class ProgramListAdapter(private val context: Context,
+                         private val onItemClick: (program: Program) -> Unit,
+                         private val onChecked: (position: Int) -> Unit) : RecyclerView.Adapter<ProgramListAdapter.ViewHolder>() {
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val view: View
-        val holder: ViewHolder
-        if (convertView == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.row_program_list, null)
-            holder = ViewHolder(view)
-            view.tag = holder
-        } else {
-            view = convertView
-            holder = view.tag as ViewHolder
-        }
-        val program = getItem(position)
+    private val inflater: LayoutInflater
+    val data: MutableList<Program>
+
+    init {
+        inflater = LayoutInflater.from(context)
+        data = mutableListOf()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(inflater.inflate(R.layout.row_program_list, parent, false))
+    }
+
+
+    override fun onBindViewHolder(holder: ProgramListAdapter.ViewHolder, position: Int) {
+        val program = data[position]
         holder.work.text = program.work.title
         holder.episode.text = "#" + program.episode.number + " " + (program.episode.title ?: "")
         holder.channel.text = program.channel.name
         holder.startedAt.text = ApiDateFormatter.getDisplayDateTimeByApiTime(program.started_at)
         holder.view.setOnClickListener {
-            val intent = Intent(context, EpisodeActivity::class.java)
-            intent.putExtras(EpisodeActivity.getBundle(program.episode.id, program.work.title))
-            context.startActivity(intent)
+            onItemClick(program)
         }
         holder.watched.setOnClickListener {
-            val animation = AnimationUtils.loadAnimation(context, R.anim.list_item_drop)
-            animation.setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationEnd(animation: Animation?) {
-                    remove(program)
-                    notifyDataSetChanged()
-                    RetrofitClient.default().build().create(AnnictService::class.java)
-                            .meRecords(token = AppPreferences.getToken(context), episodeId = program.episode.id)
-                            .subscribeOn(Schedulers.newThread())
-                            .observeOn(Schedulers.newThread())
-                            .subscribe({}, {})
-                }
-
-                override fun onAnimationRepeat(animation: Animation?) {
-                }
-
-                override fun onAnimationStart(animation: Animation?) {
-                }
-            })
-            view.startAnimation(animation)
+            println("test:" + position)
+            onChecked(position)
         }
-        return view
     }
 
-    class ViewHolder(view: View) {
+    override fun getItemCount(): Int {
+        return data.size
+    }
+
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val view: CardView = view.findViewById(R.id.programCardView) as CardView
         val work: TextView = view.findViewById(R.id.programTextViewWork) as TextView
         val episode: TextView = view.findViewById(R.id.programTextViewEpisode) as TextView
