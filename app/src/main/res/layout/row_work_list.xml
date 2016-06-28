@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/row_vertical_margin"
+    android:paddingLeft="@dimen/row_horizontal_margin"
+    android:paddingRight="@dimen/row_horizontal_margin"
+    android:paddingTop="@dimen/row_vertical_margin"
+    android:background="?android:attr/selectableItemBackground">
+
+    <TextView
+        android:id="@+id/workListTextViewTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="@dimen/text_medium"
+        tools:text="くまみこ" />
+
+    <TextView
+        android:id="@+id/workListTextViewSeason"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_small"
+        tools:text="2016年春"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:id="@+id/workListTextViewWatchers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/text_small"
+        tools:text="100人が見ています" />
+</LinearLayout>
