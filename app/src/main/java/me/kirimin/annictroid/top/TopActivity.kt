@@ -46,7 +46,7 @@ class TopActivity : AppCompatActivity() {
             drawerLayout.closeDrawers()
         }
         navigationButtonAnimeList.setOnClickListener {
-            replaceContent(WorksTopFragment(), navigationButtonAnimeList)
+            replaceContent(WorksTopFragment(), navigationButtonAnimeList, "アニメを探す")
             drawerLayout.closeDrawers()
         }
         navigationButtonSettings.setOnClickListener {
@@ -77,7 +77,8 @@ class TopActivity : AppCompatActivity() {
         drawerToggle.onConfigurationChanged(newConfig)
     }
 
-    private fun replaceContent(fragment: Fragment, selectedItem: TextView) {
+    private fun replaceContent(fragment: Fragment, selectedItem: TextView, newTitle: String = getString(R.string.app_name)) {
+        toolbar.title = newTitle
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.layoutFragmentContainer, fragment)
