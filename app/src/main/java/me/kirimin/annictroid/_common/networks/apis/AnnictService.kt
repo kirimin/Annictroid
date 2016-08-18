@@ -5,6 +5,7 @@ import me.kirimin.annictroid._common.networks.entities.*
 import retrofit2.Call
 import retrofit2.http.*
 import rx.Observable
+import rx.Single
 
 interface AnnictService {
 
@@ -13,7 +14,7 @@ interface AnnictService {
               @Query("client_secret") clientSecret: String = BuildConfig.CLIENT_SECRET,
               @Query("grant_type") grantType: String = "authorization_code",
               @Query("redirect_uri") redirectUri: String = "urn:ietf:wg:oauth:2.0:oob",
-              @Query("code") code: String): Observable<Token>
+              @Query("code") code: String): Single<Token>
 
     @Headers("Cache-Control: max-age=86400")
     @GET("v1/episodes")
@@ -24,11 +25,12 @@ interface AnnictService {
                  @Query("page") page: String = "",
                  @Query("per_page") perPage: String = "50",
                  @Query("sort_id") sortId: String = "",
-                 @Query("sort_sort_number") sortNumber: String = "asc"): Observable<Episodes>
+                 @Query("sort_sort_number") sortNumber: String = "asc"): Single<Episodes>
 
-    @Headers("Cache-Control: max-age=86400")
-    @GET("v1/works")
-    fun works(@Query("access_token") token: String,
+    @GET("{version}/works")
+    fun works(@Header("Cache-Control") cacheControl: String = "max-age=0",
+              @Path("version") version: String = "v1",
+              @Query("access_token") token: String,
               @Query("filter_ids") workIds: String = "",
               @Query("filter_season") season: String = "",
               @Query("filter_title") title: String = "",
@@ -36,7 +38,7 @@ interface AnnictService {
               @Query("per_page") perPage: String = "",
               @Query("sort_id") sortId: String = "",
               @Query("sort_season") sortSeason: String = "",
-              @Query("sort_watchers_count") sortWatchers: String = ""): Observable<Works>
+              @Query("sort_watchers_count") sortWatchers: String = ""): Single<Works>
 
     @Headers("Cache-Control: max-age=86400")
     @GET("v1/me/works")
@@ -49,7 +51,7 @@ interface AnnictService {
                 @Query("per_page") perPage: String = "15",
                 @Query("sort_id") sortId: String = "",
                 @Query("sort_season") sortSeason: String = "",
-                @Query("sort_watchers_count") sortWatchers: String = ""): Observable<Works>
+                @Query("sort_watchers_count") sortWatchers: String = ""): Single<Works>
 
     @Headers("Cache-Control: max-age=0")
     @GET("v1/me/programs")
@@ -60,7 +62,7 @@ interface AnnictService {
                    @Query("filter_started_at_gt") filterStartedAtGt: String = "",
                    @Query("filter_work_ids") workIds: String = "",
                    @Query("page") page: String = "",
-                   @Query("per_page") perPage: String = ""): Observable<Programs>
+                   @Query("per_page") perPage: String = ""): Single<Programs>
 
     @Headers("Cache-Control: max-age=86400")
     @GET("v1/me/programs")
@@ -75,5 +77,5 @@ interface AnnictService {
                   @Query("comment") comment: String = "",
                   @Query("rating") rating: String = "",
                   @Query("share_twitter") shareTwitter: Boolean = false,
-                  @Query("share_facebook") shareFacebook: Boolean = false): Observable<Record>
+                  @Query("share_facebook") shareFacebook: Boolean = false): Single<Record>
 }

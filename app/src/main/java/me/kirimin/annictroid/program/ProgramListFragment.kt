@@ -25,6 +25,7 @@ import java.util.*
 class ProgramListFragment : Fragment() {
 
     private val subscriptions = CompositeSubscription()
+    private val repository = ProgramListRepository()
     private lateinit var adapter: ProgramListAdapter
     private var nextPage: Int? = 1
 
@@ -40,11 +41,7 @@ class ProgramListFragment : Fragment() {
             startActivity(intent)
         }, onChecked = {
             // アイテムをremoveしつつ裏で登録
-            RetrofitClient.default().build().create(AnnictService::class.java)
-                    .meRecords(token = AppPreferences.getToken(context), episodeId = adapter.data[it].episode.id)
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(Schedulers.newThread())
-                    .subscribe({}, {})
+            repository.postRecord(token = AppPreferences.getToken(context), episodeId = adapter.data[it].episode.id)
             adapter.data.removeAt(it)
             adapter.notifyItemRemoved(it)
             adapter.notifyDataSetChanged()
@@ -86,12 +83,11 @@ class ProgramListFragment : Fragment() {
         view?.swipeLayout?.isRefreshing = true
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DAY_OF_MONTH, 1)
-        subscriptions.add(RetrofitClient.default().build().create(AnnictService::class.java)
-                .mePrograms(token = AppPreferences.getToken(context),
-                        filterStartedAt = ApiDateFormatter.getApiTime(calendar),
-                        filterUnWatched = "true",
-                        sortStartedAt = "desc",
-                        page = nextPage?.toString() ?: "")
+        subscriptions.add(repository.requestPrograms(token = AppPreferences.getToken(context),
+                filterStartedAt = ApiDateFormatter.getApiTime(calendar),
+                filterUnWatched = "true",
+                sortStartedAt = "desc",
+                page = nextPage?.toString() ?: "")
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({

@@ -9,6 +9,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_work_list.view.*
 import me.kirimin.annictroid.R
 import me.kirimin.annictroid._common.networks.RetrofitClient
@@ -18,6 +19,7 @@ import me.kirimin.annictroid._common.ui_parts.DividerItemDecoration
 import me.kirimin.annictroid._common.utils.ApiDateFormatter
 import me.kirimin.annictroid.work.WorkActivity
 import rx.android.schedulers.AndroidSchedulers
+import rx.lang.kotlin.plusAssign
 import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription
 import java.util.*
@@ -88,17 +90,19 @@ class WorkListFragment : Fragment() {
             Type.NEXT_SEASON -> ApiDateFormatter.getNextSeason(Calendar.getInstance())
             Type.ALL -> ""
         }
-        subscriptions.add(client.works(token = token, season = season, sortWatchers = "desc", page = nextPage?.toString() ?: "")
+        subscriptions += client.works(token = token, season = season,
+                sortWatchers = "desc", page = nextPage?.toString() ?: "")
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe ({
+                .subscribe({
                     view?.swipeLayout?.isRefreshing = false
                     adapter.data.addAll(it.works)
                     adapter.notifyDataSetChanged()
                     nextPage = it.next_page
                 }, {
                     view?.swipeLayout?.isRefreshing = false
-                }))
+                    Toast.makeText(context, R.string.common_network_error, Toast.LENGTH_SHORT).show()
+                })
     }
 
     companion object {

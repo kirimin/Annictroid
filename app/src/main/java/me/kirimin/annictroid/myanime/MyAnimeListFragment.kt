@@ -93,6 +93,7 @@ class MyAnimeListFragment : Fragment() {
                 sortSeason = "desc",
                 page = nextPage?.toString() ?: "")
                 .subscribeOn(Schedulers.newThread())
+                .toObservable()
                 .flatMap { nextPageTmp = it.next_page; Observable.from(it.works) }
                 // 並列処理のために
                 .flatMap {

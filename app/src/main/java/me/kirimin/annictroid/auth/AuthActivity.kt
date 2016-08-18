@@ -21,6 +21,7 @@ import rx.subscriptions.CompositeSubscription
 class AuthActivity : AppCompatActivity() {
 
     private val subscriptions = CompositeSubscription()
+    private val repository = AuthRepository()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +34,7 @@ class AuthActivity : AppCompatActivity() {
 
         buttonLogin.setOnClickListener {
             buttonLogin.isClickable = false
-            subscriptions.add(RetrofitClient.default().build().create(AnnictService::class.java)
-                    .token(code = editTextCode.text.toString())
+            subscriptions.add(repository.requestToken(code = editTextCode.text.toString())
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe ({

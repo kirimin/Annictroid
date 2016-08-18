@@ -16,6 +16,7 @@ import me.kirimin.annictroid._common.networks.apis.AnnictService
 import me.kirimin.annictroid._common.preferences.AppPreferences
 import me.kirimin.annictroid.episode.EpisodeActivity
 import rx.Observable
+import rx.Single
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription
@@ -39,7 +40,7 @@ class WorkActivity : AppCompatActivity() {
                 .episodes(token = AppPreferences.getToken(this),
                         workId = intent.getStringExtra(WORK_ID),
                         sortNumber = "desc")
-        subscriptions.add(Observable.zip(worksObservable, episodesObservable, { works, episodes -> Pair(works, episodes) })
+        subscriptions.add(Single.zip(worksObservable, episodesObservable, { works, episodes -> Pair(works, episodes) })
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({
