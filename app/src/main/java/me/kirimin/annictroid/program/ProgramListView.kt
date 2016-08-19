@@ -51,6 +51,7 @@ interface ProgramListView {
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(context)
             recyclerView.itemAnimator = SlideInLeftAnimator()
+            recyclerView.itemAnimator.removeDuration = 100
             recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
