@@ -52,7 +52,7 @@ class ProgramListAdapter(context: Context,
             onItemClick(program)
         }
         holder.watched.setOnClickListener {
-            onChecked(position, program)
+            onChecked(data.indexOf(program), program)
         }
     }
 

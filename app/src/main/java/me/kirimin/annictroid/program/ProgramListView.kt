@@ -3,6 +3,7 @@ package me.kirimin.annictroid.program
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.TypedValue
@@ -10,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.fragment_program_list.*
 import me.kirimin.annictroid.R
 import me.kirimin.annictroid._common.networks.entities.Program
@@ -48,7 +50,7 @@ interface ProgramListView {
             })
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.itemAnimator
+            recyclerView.itemAnimator = SlideInLeftAnimator()
             recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
@@ -72,7 +74,6 @@ interface ProgramListView {
         override fun removeProgram(position: Int) {
             adapter.data.removeAt(position)
             adapter.notifyItemRemoved(position)
-            adapter.notifyDataSetChanged()
         }
 
         override fun clearPrograms() {
