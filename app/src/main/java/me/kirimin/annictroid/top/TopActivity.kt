@@ -30,7 +30,7 @@ class TopActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_top)
         setSupportActionBar(toolbar)
-        if (AppPreferences.getToken(this) == "") {
+        if (AppPreferences.getToken() == "") {
             startActivity(Intent(this, AuthActivity::class.java))
             finish()
             return
@@ -97,7 +97,7 @@ class TopActivity : AppCompatActivity() {
                     .setMessage("ログアウトしますか？")
                     .setPositiveButton(android.R.string.ok) { dialog, which ->
                         val activity = activity ?: return@setPositiveButton
-                        AppPreferences.setToken(activity, "")
+                        AppPreferences.setToken("")
                         activity.finish()
                         val intent = Intent(activity, AuthActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP

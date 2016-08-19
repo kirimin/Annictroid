@@ -25,9 +25,9 @@ import retrofit2.Response
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
-class ProgramListAdapter(private val context: Context,
+class ProgramListAdapter(context: Context,
                          private val onItemClick: (program: Program) -> Unit,
-                         private val onChecked: (position: Int) -> Unit) : RecyclerView.Adapter<ProgramListAdapter.ViewHolder>() {
+                         private val onChecked: (position: Int, program:Program) -> Unit) : RecyclerView.Adapter<ProgramListAdapter.ViewHolder>() {
 
     private val inflater: LayoutInflater
     val data: MutableList<Program>
@@ -52,8 +52,7 @@ class ProgramListAdapter(private val context: Context,
             onItemClick(program)
         }
         holder.watched.setOnClickListener {
-            println("test:" + position)
-            onChecked(position)
+            onChecked(position, program)
         }
     }
 

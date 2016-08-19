@@ -16,6 +16,7 @@ import me.kirimin.annictroid._common.networks.apis.AnnictService
 import me.kirimin.annictroid._common.preferences.AppPreferences
 import me.kirimin.annictroid.episode.EpisodeActivity
 import rx.Observable
+import rx.Single
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription
@@ -33,13 +34,13 @@ class WorkActivity : AppCompatActivity() {
         supportActionBar?.setHomeButtonEnabled(true)
 
         val worksObservable = RetrofitClient.default().build().create(AnnictService::class.java)
-                .works(token = AppPreferences.getToken(this),
+                .works(token = AppPreferences.getToken(),
                         workIds = intent.getStringExtra(WORK_ID))
         val episodesObservable = RetrofitClient.default().build().create(AnnictService::class.java)
-                .episodes(token = AppPreferences.getToken(this),
+                .episodes(token = AppPreferences.getToken(),
                         workId = intent.getStringExtra(WORK_ID),
                         sortNumber = "desc")
-        subscriptions.add(Observable.zip(worksObservable, episodesObservable, { works, episodes -> Pair(works, episodes) })
+        subscriptions.add(Single.zip(worksObservable, episodesObservable, { works, episodes -> Pair(works, episodes) })
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({
