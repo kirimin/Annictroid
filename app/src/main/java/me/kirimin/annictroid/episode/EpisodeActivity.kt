@@ -42,7 +42,7 @@ class EpisodeActivity : AppCompatActivity() {
             buttonRecode.isClickable = false
             val rating = textViewRatingNum.text.toString()
             subscriptions.add(RetrofitClient.default().build().create(AnnictService::class.java)
-                    .meRecords(token = AppPreferences.getToken(this),
+                    .meRecords(token = AppPreferences.getToken(),
                             episodeId = episodeId,
                             comment = editTextComment.text.toString(),
                             rating = if (rating == "-") "" else rating,
@@ -58,7 +58,7 @@ class EpisodeActivity : AppCompatActivity() {
                     }))
         }
         subscriptions.add(RetrofitClient.default().build().create(AnnictService::class.java)
-                .episodes(token = AppPreferences.getToken(this),
+                .episodes(token = AppPreferences.getToken(),
                         episodeIds = episodeId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

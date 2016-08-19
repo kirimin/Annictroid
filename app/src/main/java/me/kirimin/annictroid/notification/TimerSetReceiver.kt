@@ -19,7 +19,7 @@ import java.util.*
  */
 class TimerSetReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        if (AppPreferences.getToken(context) == "" || !AppPreferences.isNotificationEnable(context)) return
+        if (AppPreferences.getToken() == "" || !AppPreferences.isNotificationEnable(context)) return
         if (Intent.ACTION_PACKAGE_ADDED == intent.action && intent.dataString != ("package:" + context.packageName)) return
 
         setSelf(context)
@@ -65,7 +65,7 @@ class TimerSetReceiver : BroadcastReceiver() {
         val startedAt = ApiDateFormatter.getApiTime(calendar)
 
         RetrofitClient.default().build().create(AnnictService::class.java)
-                .mePrograms(token = AppPreferences.getToken(context),
+                .mePrograms(token = AppPreferences.getToken(),
                         filterStartedAt = startedAt,
                         filterStartedAtGt = startedAtGt,
                         filterUnWatched = "true",

@@ -38,7 +38,7 @@ class AuthActivity : AppCompatActivity() {
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe ({
-                        AppPreferences.setToken(this, it.access_token)
+                        AppPreferences.setToken(it.access_token)
                         sendBroadcast(Intent(this, TimerSetReceiver::class.java))
                         startActivity(Intent(this, TopActivity::class.java))
                         finish()

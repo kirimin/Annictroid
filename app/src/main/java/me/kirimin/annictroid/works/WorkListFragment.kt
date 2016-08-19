@@ -83,7 +83,7 @@ class WorkListFragment : Fragment() {
 
     fun request() {
         view?.swipeLayout?.isRefreshing = true
-        val token = AppPreferences.getToken(context)
+        val token = AppPreferences.getToken()
         val client = RetrofitClient.default().build().create(AnnictService::class.java)
         val season = when (type) {
             Type.THIS_SEASON -> ApiDateFormatter.getCurrentSeason(Calendar.getInstance())

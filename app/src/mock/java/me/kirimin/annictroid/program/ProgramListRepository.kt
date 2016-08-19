@@ -21,4 +21,6 @@ class ProgramListRepository {
 
     fun postRecord(token: String, episodeId: String) {
     }
+
+    fun getToken() = ""
 }

@@ -1,14 +1,12 @@
 package me.kirimin.annictroid.program
 
-import me.kirimin.annictroid.BuildConfig
+import me.kirimin.annictroid.Annictroid
 import me.kirimin.annictroid._common.networks.RetrofitClient
 import me.kirimin.annictroid._common.networks.apis.AnnictService
-import me.kirimin.annictroid._common.networks.entities.Channel
-import me.kirimin.annictroid._common.networks.entities.Program
 import me.kirimin.annictroid._common.networks.entities.Programs
-import me.kirimin.annictroid._common.networks.entities.Work
-import rx.Observable
+import me.kirimin.annictroid._common.preferences.AppPreferences
 import rx.Single
+import rx.schedulers.Schedulers
 
 class ProgramListRepository {
 
@@ -32,4 +30,6 @@ class ProgramListRepository {
                 .observeOn(Schedulers.newThread())
                 .subscribe({}, {})
     }
+
+    fun getToken() = AppPreferences.getToken()
 }
