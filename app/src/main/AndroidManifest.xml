@@ -7,29 +7,30 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:name=".Annictroid"
+        android:name="me.kirimin.annictroid.Annictroid"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="${appName}"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".top.TopActivity">
+        <activity android:name="me.kirimin.annictroid.top.TopActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".episode.EpisodeActivity" />
-        <activity android:name=".auth.AuthActivity" />
+        <activity android:name="me.kirimin.annictroid.episode.EpisodeActivity" />
+        <activity android:name="me.kirimin.annictroid.work.WorkActivity" />
+        <activity android:name="me.kirimin.annictroid.auth.AuthActivity" />
         <activity
-            android:name=".settings.SettingsActivity"
+            android:name="me.kirimin.annictroid.settings.SettingsActivity"
             android:theme="@style/SettingsTheme" />
-        <activity android:name=".settings.AboutActivity" />
-        <activity android:name=".settings.LicenseActivity" />
+        <activity android:name="me.kirimin.annictroid.settings.AboutActivity" />
+        <activity android:name="me.kirimin.annictroid.settings.LicenseActivity" />
 
-        <receiver android:name=".notification.ProgramReceiver" />
-        <receiver android:name=".notification.TimerSetReceiver">
+        <receiver android:name="me.kirimin.annictroid.notification.ProgramReceiver" />
+        <receiver android:name="me.kirimin.annictroid.notification.TimerSetReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -38,8 +39,6 @@
                 <action android:name="android.intent.action.TIME_SET" />
             </intent-filter>
         </receiver>
-
-        <activity android:name=".work.WorkActivity"></activity>
     </application>
 
 </manifest>

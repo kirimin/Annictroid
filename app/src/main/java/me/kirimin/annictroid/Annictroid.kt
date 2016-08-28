@@ -10,5 +10,11 @@ class Annictroid : Application() {
     override fun onCreate() {
         super.onCreate()
         analytics = FirebaseAnalytics.getInstance(this)
+        instance = this;
+    }
+
+    companion object {
+
+        lateinit var instance: Annictroid
     }
 }

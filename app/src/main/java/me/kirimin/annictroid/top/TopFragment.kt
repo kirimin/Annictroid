@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_top.view.*
 import me.kirimin.annictroid.R
 import me.kirimin.annictroid.myanime.MyAnimeListFragment
-import me.kirimin.annictroid.program.ProgramListFragment
+import me.kirimin.annictroid.program.ProgramListView
 
 class TopFragment : Fragment() {
 
@@ -20,7 +20,7 @@ class TopFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = TopPagerAdapter(childFragmentManager)
-        adapter.addPage(ProgramListFragment(), "放送予定")
+        adapter.addPage(ProgramListView.ProgramListFragment(), "放送予定")
         adapter.addPage(MyAnimeListFragment.newInstance(MyAnimeListFragment.Type.WATCHING), "見てるアニメ")
         adapter.addPage(MyAnimeListFragment.newInstance(MyAnimeListFragment.Type.WATCHED), "見たアニメ")
         adapter.addPage(MyAnimeListFragment.newInstance(MyAnimeListFragment.Type.WANNA_WATCH), "見たいアニメ")

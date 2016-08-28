@@ -85,7 +85,7 @@ class MyAnimeListFragment : Fragment() {
 
     fun request() {
         view?.swipeLayout?.isRefreshing = true
-        val token = AppPreferences.getToken(context)
+        val token = AppPreferences.getToken()
         val client = RetrofitClient.default().build().create(AnnictService::class.java)
         var nextPageTmp: Int? = null
         subscriptions.add(client.meWorks(token = token,
@@ -93,6 +93,7 @@ class MyAnimeListFragment : Fragment() {
                 sortSeason = "desc",
                 page = nextPage?.toString() ?: "")
                 .subscribeOn(Schedulers.newThread())
+                .toObservable()
                 .flatMap { nextPageTmp = it.next_page; Observable.from(it.works) }
                 // 並列処理のために
                 .flatMap {

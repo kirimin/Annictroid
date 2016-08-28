@@ -3,14 +3,17 @@ package me.kirimin.annictroid._common.preferences
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import me.kirimin.annictroid.Annictroid
 import me.kirimin.annictroid.R
 
 object AppPreferences {
 
-    fun getToken(context: Context) = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getString(R.string.key_token), "")
 
-    fun setToken(context: Context, token: String) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putString(context.getString(R.string.key_token), token).apply()
+
+    fun getToken() = PreferenceManager.getDefaultSharedPreferences(Annictroid.instance).getString(Annictroid.instance.getString(R.string.key_token), "")
+
+    fun setToken(token: String) {
+        PreferenceManager.getDefaultSharedPreferences(Annictroid.instance).edit().putString(Annictroid.instance.getString(R.string.key_token), token).apply()
     }
 
     fun getNotificationBuffer(context: Context) =
