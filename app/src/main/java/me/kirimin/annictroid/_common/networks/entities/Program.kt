@@ -8,7 +8,7 @@ data class Program(val id: String = "",
                    val episode: Episode) {
 
     data class Episode(val id: String = "",
-                       val number: Int = 0,
+                       val number: Float = 0f,
                        val number_text: String = "",
                        val sort_number: Int = 0,
                        val title: String? = null,
