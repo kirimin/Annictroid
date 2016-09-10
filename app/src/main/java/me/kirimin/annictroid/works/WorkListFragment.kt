@@ -41,6 +41,7 @@ class WorkListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        nextPage = 1
         type = arguments.getSerializable("type") as Type
         adapter = WorkListAdapter(context, onItemClick = {
             val intent = Intent(context, WorkActivity::class.java)

@@ -3,7 +3,6 @@ package me.kirimin.annictroid.program
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.TypedValue
@@ -21,21 +20,22 @@ interface ProgramListView {
 
     class ProgramListFragment : Fragment(), ProgramListView {
 
-        private val presenter = ProgramListPresenter()
+        private lateinit var presenter : ProgramListPresenter
         private lateinit var adapter: ProgramListAdapter
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
             return inflater.inflate(R.layout.fragment_program_list, container, false)
         }
 
-        override fun onActivityCreated(savedInstanceState: Bundle?) {
-            super.onActivityCreated(savedInstanceState)
+        override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+            super.onViewCreated(view, savedInstanceState)
+            presenter = ProgramListPresenter()
             presenter.onCreate(this)
         }
 
-        override fun onDestroy() {
+        override fun onDestroyView() {
             presenter.onDestroy()
-            super.onDestroy()
+            super.onDestroyView()
         }
 
         override fun isRefreshing(value: Boolean) {
