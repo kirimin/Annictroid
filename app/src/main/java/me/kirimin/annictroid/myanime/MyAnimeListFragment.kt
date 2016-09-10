@@ -35,13 +35,13 @@ class MyAnimeListFragment : Fragment() {
     private var type = Type.WATCHING
     private var nextPage: Int? = 1
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_my_anime_list, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        nextPage = 1
         type = arguments.getSerializable("type") as Type
         adapter = MyAnimeListAdapter(context, onItemClick = {
             val intent = Intent(context, WorkActivity::class.java)

@@ -1,7 +1,7 @@
 package me.kirimin.annictroid._common.networks.entities
 
 data class Episode(val id: String,
-                   val number: Int,
+                   val number: Float,
                    val number_text: String,
                    val sort_number: Int,
                    val title: String?,
@@ -11,7 +11,7 @@ data class Episode(val id: String,
                    val next_episode: OtherEpisode?) {
 
     data class OtherEpisode(val id: String,
-                            val number: Int,
+                            val number: Float,
                             val number_text: String,
                             val sort_number: Int,
                             val title: String?,
