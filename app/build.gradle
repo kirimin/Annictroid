@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "23.0.3"
+    buildToolsVersion '25.0.2'
 
     defaultConfig {
         applicationId "me.kirimin.annictroid"
@@ -70,7 +70,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 buildscript {
-    ext.kotlin_version = '1.0.2'
+    ext.kotlin_version = '1.0.6'
     repositories {
         mavenCentral()
     }
