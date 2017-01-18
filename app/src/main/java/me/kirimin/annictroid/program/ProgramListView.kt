@@ -79,6 +79,7 @@ interface ProgramListView {
 
         override fun clearPrograms() {
             adapter.data.clear()
+            adapter.notifyDataSetChanged()
         }
 
         override fun addPrograms(programs: List<Program>) {
