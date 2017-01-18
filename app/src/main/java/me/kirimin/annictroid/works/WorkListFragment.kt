@@ -71,6 +71,7 @@ class WorkListFragment : Fragment() {
         view.swipeLayout.setProgressViewOffset(false, 0, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24f, resources.displayMetrics).toInt())
         view.swipeLayout.setOnRefreshListener {
             adapter.data.clear()
+            adapter.notifyDataSetChanged()
             nextPage = 1
             request()
         }
